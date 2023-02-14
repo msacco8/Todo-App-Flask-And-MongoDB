@@ -14,6 +14,7 @@ class Todo(db.Model):
     title = db.Column(db.String(100))
     complete = db.Column(db.Boolean)
 
+# Add new todo route
 @app.route("/add", methods=["POST"])
 def add():
     title = request.form.get("title")
@@ -22,6 +23,7 @@ def add():
     db.session.commit()
     return redirect(url_for("home"))
 
+# Update existing todo route
 @app.route("/update/<int:todo_id>")
 def update(todo_id):
     todo = Todo.query.filter_by(id=todo_id).first()
@@ -29,6 +31,7 @@ def update(todo_id):
     db.session.commit()
     return redirect(url_for("home"))
 
+# Delete existing todo route
 @app.route("/delete/<int:todo_id>")
 def delete(todo_id):
     todo = Todo.query.filter_by(id=todo_id).first()
@@ -36,6 +39,7 @@ def delete(todo_id):
     db.session.commit()
     return redirect(url_for("home"))
     
+# Route home
 @app.route("/")
 def home():
     todo_list = Todo.query.all()
