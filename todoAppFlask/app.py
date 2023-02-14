@@ -39,7 +39,7 @@ def delete(todo_id):
     db.session.commit()
     return redirect(url_for("home"))
     
-# Route home
+# home route
 @app.route("/")
 def home():
     todo_list = Todo.query.all()
